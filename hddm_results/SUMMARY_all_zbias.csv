@@ -1,0 +1,15 @@
+experiment,replication,stim_cond,mean_z,pBayes_self,pBayes_friend,p_bias,direction,evidence
+Exp1,successful,none,0.52,1.0,0.0,0.0,self,extremely strong
+Exp1,successful,equal,0.509,0.9856,0.0144,0.0144,self,extremely strong
+Exp1,failed,none,0.515,0.9999,0.0001,0.0001,self,extremely strong
+Exp1,failed,equal,0.525,1.0,0.0,0.0,self,extremely strong
+Exp2,successful,self,0.536,1.0,0.0,0.0,self,extremely strong
+Exp2,successful,friend,0.359,0.0,1.0,0.0,friend,extremely strong
+Exp2,successful,equal,0.497,0.1823,0.8177,0.1823,friend,moderate
+Exp2,failed,self,0.525,1.0,0.0,0.0,self,extremely strong
+Exp2,failed,friend,0.48,0.0,1.0,0.0,friend,extremely strong
+Exp2,failed,equal,0.508,0.9536,0.0464,0.0464,self,extremely strong
+Exp3,successful,self,0.481,0.0004,0.9996,0.0004,friend,extremely strong
+Exp3,successful,friend,0.561,1.0,0.0,0.0,self,extremely strong
+Exp3,failed,self,0.461,0.0,1.0,0.0,friend,extremely strong
+Exp3,failed,friend,0.471,0.0,1.0,0.0,friend,extremely strong
