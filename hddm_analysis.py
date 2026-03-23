@@ -41,8 +41,8 @@ warnings.filterwarnings("ignore")
 # CONFIGURATION
 # ─────────────────────────────────────────────────────────────────
 
-INPUT_DIR  = "/Users/paigeevans/Desktop/Replication Data Analysis"
-OUTPUT_DIR = "/Users/paigeevans/Desktop/Replication Data Analysis/hddm_results"
+INPUT_DIR  = "/Users/paigeevans/Desktop/Results V2"
+OUTPUT_DIR = "/Users/paigeevans/Desktop/Results V2/hddm_results"
 os.makedirs(OUTPUT_DIR, exist_ok=True)
 
 SAMPLES = 10_000
@@ -187,16 +187,11 @@ def fit_model(data, model_name, depends_on, exp_label, rep_label):
         f"{exp_label}_{rep_label}_{model_name}.db"
     )
 
-    # include=['z'] is required: z is fixed at 0.5 by default and is not
-    # created as a free node unless explicitly included. Without this,
-    # depends_on for z causes kabuki's post-build assertion to fail because
-    # no z nodes are created and kabuki cannot find z's dependency column
-    # in nodes_db. sv/sz/st are NOT included — those trigger full_ddm mode
-    # which conflicts with multi-parameter depends_on.
-    # Every parameter named in depends_on must appear in include,
-    # otherwise kabuki's post-build node check throws an AssertionError.
-    # We always add 't' as well (non-decision time, standard to estimate).
-    include = list(set(list(depends_on.keys()) + ["t"]))
+    # Build include list from depends_on keys + inter-trial variability
+    # parameters matching paper p.1471 (sv, sz, st) + t (non-decision time).
+    # sv/sz/st trigger full_ddm mode — confirmed compatible with depends_on
+    # once stim_cond column is correctly typed as object dtype.
+    include = list(set(list(depends_on.keys()) + ["t", "sv", "sz", "st"]))
     m = hddm.HDDM(
         data,
         depends_on=depends_on,
